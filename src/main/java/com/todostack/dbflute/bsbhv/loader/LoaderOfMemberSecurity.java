@@ -22,13 +22,13 @@ import com.todostack.dbflute.exbhv.*;
 import com.todostack.dbflute.exentity.*;
 
 /**
- * The referrer loader of (会員セキュリティ情報)MEMBER_SECURITY as TABLE. <br>
+ * The referrer loader of (会員セキュリティ)MEMBER_SECURITY as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, LOGIN_PASSWORD, REMINDER_QUESTION, REMINDER_ANSWER, REMINDER_USE_COUNT, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_ID, LOGIN_PASSWORD, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     

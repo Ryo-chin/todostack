@@ -22,9 +22,7 @@ import org.dbflute.optional.OptionalThing;
 import com.todostack.app.web.signin.SigninAction;
 import com.todostack.dbflute.cbean.MemberCB;
 import com.todostack.dbflute.exbhv.MemberBhv;
-import com.todostack.dbflute.exbhv.MemberLoginBhv;
 import com.todostack.dbflute.exentity.Member;
-import com.todostack.dbflute.exentity.MemberLogin;
 import com.todostack.mylasta.action.TodostackUserBean;
 import com.todostack.mylasta.direction.TodostackConfig;
 import org.lastaflute.core.magic.async.AsyncManager;
@@ -38,7 +36,7 @@ import org.lastaflute.web.login.option.LoginSpecifiedOption;
 /**
  * @author jflute
  */
-public class TodostackLoginAssist extends TypicalLoginAssist<Integer, TodostackUserBean, Member> // #change_it also UserBean
+public class TodostackLoginAssist extends TypicalLoginAssist<String, TodostackUserBean, Member> // #change_it also UserBean
         implements PrimaryLoginManager { // #app_customize
 
     // ===================================================================================
@@ -54,8 +52,6 @@ public class TodostackLoginAssist extends TypicalLoginAssist<Integer, TodostackU
     private TodostackConfig config;
     @Resource
     private MemberBhv memberBhv;
-    @Resource
-    private MemberLoginBhv memberLoginBhv;
 
     // ===================================================================================
     //                                                                           Find User
@@ -79,8 +75,8 @@ public class TodostackLoginAssist extends TypicalLoginAssist<Integer, TodostackU
     }
 
     @Override
-    protected OptionalEntity<Member> doFindLoginUser(Integer userId) {
-        return memberBhv.selectEntity(cb -> cb.query().arrangeLoginByIdentity(userId));
+    protected OptionalEntity<Member> doFindLoginUser(String email) {
+        return memberBhv.selectEntity(cb -> cb.query().arrangeLoginByIdentity(email));
     }
 
     // ===================================================================================
@@ -97,35 +93,37 @@ public class TodostackLoginAssist extends TypicalLoginAssist<Integer, TodostackU
     }
 
     @Override
-    protected Integer toTypedUserId(String userKey) {
-        return Integer.valueOf(userKey);
+    protected String toTypedUserId(String userKey) {
+        return userKey;
+    }
+
+    @Override
+    protected Class<TodostackUserBean> getUserBeanType() {
+        return TodostackUserBean.class;
     }
 
     @Override
     protected void saveLoginHistory(Member member, TodostackUserBean userBean, LoginSpecifiedOption option) {
         asyncManager.async(() -> {
             transactionStage.requiresNew(tx -> {
-                insertLogin(member);
+                // TODO: 2017/01/02 make login history table
+//                insertLogin(member);
             });
         });
     }
 
-    protected void insertLogin(Member member) {
-        MemberLogin login = new MemberLogin();
-        login.setMemberId(member.getMemberId());
-        login.setLoginMemberStatusCodeAsMemberStatus(member.getMemberStatusCodeAsMemberStatus());
-        login.setLoginDatetime(timeManager.currentDateTime());
-        login.setMobileLoginFlg_False(); // mobile unsupported for now
-        memberLoginBhv.insert(login);
-    }
+//    protected void insertLogin(Member member) {
+//        MemberLogin login = new MemberLogin();
+//        login.setMemberId(member.getMemberId());
+//        login.setLoginMemberStatusCodeAsMemberStatus(member.getMemberStatusCodeAsMemberStatus());
+//        login.setLoginDatetime(timeManager.currentDateTime());
+//        login.setMobileLoginFlg_False(); // mobile unsupported for now
+//        memberLoginBhv.insert(login);
+//    }
 
     // ===================================================================================
     //                                                                      Login Resource
     //                                                                      ==============
-    @Override
-    protected Class<TodostackUserBean> getUserBeanType() {
-        return TodostackUserBean.class;
-    }
 
     @Override
     protected Class<?> getLoginActionType() {

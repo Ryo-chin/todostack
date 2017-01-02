@@ -138,7 +138,8 @@ public class TodostackFwAssistantDirector extends CachedFwAssistantDirector {
     }
 
     protected TodostackCookieResourceProvider createCookieResourceProvider() { // #change_it_first
-        final InvertibleCryptographer cr = InvertibleCryptographer.createAesCipher("dockside:todostack:");
+        // TODO: 2017/01/02 暗号方式の決定
+        final InvertibleCryptographer cr = InvertibleCryptographer.createAesCipher("bakibaki:hakiba:");
         return new TodostackCookieResourceProvider(config, cr);
     }
 

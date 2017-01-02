@@ -38,8 +38,8 @@ public interface TodostackConfig extends TodostackEnv {
     /** The key of the configuration. e.g. 315360000 */
     String COOKIE_ETERNAL_EXPIRE = "cookie.eternal.expire";
 
-    /** The key of the configuration. e.g. HRB */
-    String COOKIE_REMEMBER_ME_HARBOR_KEY = "cookie.remember.me.todostack.key";
+    /** The key of the configuration. e.g. TDS */
+    String COOKIE_REMEMBER_ME_TODOSTACK_KEY = "cookie.remember.me.todostack.key";
 
     /**
      * Get the value of property as {@link String}.
@@ -117,7 +117,7 @@ public interface TodostackConfig extends TodostackEnv {
 
     /**
      * Get the value for the key 'cookie.remember.me.todostack.key'. <br>
-     * The value is, e.g. HRB <br>
+     * The value is, e.g. TDS <br>
      * comment: The cookie key of remember-me for Todostack #change_it_first
      * @return The value of found property. (NotNull: if not found, exception but basically no way)
      */
@@ -161,7 +161,7 @@ public interface TodostackConfig extends TodostackEnv {
         }
 
         public String getCookieRememberMeTodostackKey() {
-            return get(TodostackConfig.COOKIE_REMEMBER_ME_HARBOR_KEY);
+            return get(TodostackConfig.COOKIE_REMEMBER_ME_TODOSTACK_KEY);
         }
     }
 }

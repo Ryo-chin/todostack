@@ -78,9 +78,6 @@ public class MemberSecurityCIQ extends AbstractBsMemberSecurityCQ {
     //                                                                ====================
     protected ConditionValue xgetCValueMemberId() { return _myCQ.xdfgetMemberId(); }
     protected ConditionValue xgetCValueLoginPassword() { return _myCQ.xdfgetLoginPassword(); }
-    protected ConditionValue xgetCValueReminderQuestion() { return _myCQ.xdfgetReminderQuestion(); }
-    protected ConditionValue xgetCValueReminderAnswer() { return _myCQ.xdfgetReminderAnswer(); }
-    protected ConditionValue xgetCValueReminderUseCount() { return _myCQ.xdfgetReminderUseCount(); }
     protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
     protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }
     protected ConditionValue xgetCValueUpdateDatetime() { return _myCQ.xdfgetUpdateDatetime(); }

@@ -47,21 +47,9 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
     static {
         final Map<String, String> tmpMap = newHashMap();
         tmpMap.put("MEMBER", "com.todostack.dbflute.bsentity.dbmeta.MemberDbm");
-        tmpMap.put("MEMBER_ADDRESS", "com.todostack.dbflute.bsentity.dbmeta.MemberAddressDbm");
-        tmpMap.put("MEMBER_FOLLOWING", "com.todostack.dbflute.bsentity.dbmeta.MemberFollowingDbm");
-        tmpMap.put("MEMBER_LOGIN", "com.todostack.dbflute.bsentity.dbmeta.MemberLoginDbm");
         tmpMap.put("MEMBER_SECURITY", "com.todostack.dbflute.bsentity.dbmeta.MemberSecurityDbm");
-        tmpMap.put("MEMBER_SERVICE", "com.todostack.dbflute.bsentity.dbmeta.MemberServiceDbm");
-        tmpMap.put("MEMBER_STATUS", "com.todostack.dbflute.bsentity.dbmeta.MemberStatusDbm");
-        tmpMap.put("MEMBER_WITHDRAWAL", "com.todostack.dbflute.bsentity.dbmeta.MemberWithdrawalDbm");
-        tmpMap.put("PRODUCT", "com.todostack.dbflute.bsentity.dbmeta.ProductDbm");
-        tmpMap.put("PRODUCT_CATEGORY", "com.todostack.dbflute.bsentity.dbmeta.ProductCategoryDbm");
-        tmpMap.put("PRODUCT_STATUS", "com.todostack.dbflute.bsentity.dbmeta.ProductStatusDbm");
-        tmpMap.put("PURCHASE", "com.todostack.dbflute.bsentity.dbmeta.PurchaseDbm");
-        tmpMap.put("PURCHASE_PAYMENT", "com.todostack.dbflute.bsentity.dbmeta.PurchasePaymentDbm");
-        tmpMap.put("REGION", "com.todostack.dbflute.bsentity.dbmeta.RegionDbm");
-        tmpMap.put("SERVICE_RANK", "com.todostack.dbflute.bsentity.dbmeta.ServiceRankDbm");
-        tmpMap.put("WITHDRAWAL_REASON", "com.todostack.dbflute.bsentity.dbmeta.WithdrawalReasonDbm");
+        tmpMap.put("TASK", "com.todostack.dbflute.bsentity.dbmeta.TaskDbm");
+        tmpMap.put("TASK_WORK", "com.todostack.dbflute.bsentity.dbmeta.TaskWorkDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);
     }
 

@@ -41,7 +41,7 @@ import com.todostack.dbflute.cbean.*;
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, MEMBER_NAME, MEMBER_ACCOUNT, MEMBER_STATUS_CODE, FORMALIZED_DATETIME, BIRTHDATE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_ID, MEMBER_ACCOUNT, E_MAIL, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -53,16 +53,16 @@ import com.todostack.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     MEMBER_STATUS, MEMBER_ADDRESS(AsValid), MEMBER_LOGIN(AsLatest), MEMBER_SECURITY(AsOne), MEMBER_SERVICE(AsOne), MEMBER_WITHDRAWAL(AsOne)
+ *     MEMBER_SECURITY(AsOne)
  *
  * [referrer table]
- *     MEMBER_ADDRESS, MEMBER_FOLLOWING, MEMBER_LOGIN, PURCHASE, MEMBER_SECURITY, MEMBER_SERVICE, MEMBER_WITHDRAWAL
+ *     TASK, MEMBER_SECURITY
  *
  * [foreign property]
- *     memberStatus, memberAddressAsValid, memberLoginAsLatest, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
+ *     memberSecurityAsOne
  *
  * [referrer property]
- *     memberAddressList, memberFollowingByMyMemberIdList, memberFollowingByYourMemberIdList, memberLoginList, purchaseList
+ *     taskList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -172,56 +172,56 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId (会員ID): PK, ID, NotNull, INTEGER(10), FK to MEMBER_ADDRESS. (NotNull)
+     * @param memberId (会員ID): PK, ID, NotNull, BIGINT UNSIGNED(20). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Member> selectByPK(Integer memberId) {
+    public OptionalEntity<Member> selectByPK(Long memberId) {
         return facadeSelectByPK(memberId);
     }
 
-    protected OptionalEntity<Member> facadeSelectByPK(Integer memberId) {
+    protected OptionalEntity<Member> facadeSelectByPK(Long memberId) {
         return doSelectOptionalByPK(memberId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Member> ENTITY doSelectByPK(Integer memberId, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Member> ENTITY doSelectByPK(Long memberId, Class<? extends ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(memberId), tp);
     }
 
-    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer memberId, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectOptionalByPK(Long memberId, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(memberId, tp), memberId);
     }
 
-    protected MemberCB xprepareCBAsPK(Integer memberId) {
+    protected MemberCB xprepareCBAsPK(Long memberId) {
         assertObjectNotNull("memberId", memberId);
         return newConditionBean().acceptPK(memberId);
     }
 
     /**
      * Select the entity by the unique-key value.
-     * @param memberAccount (会員アカウント): UQ, NotNull, VARCHAR(50). (NotNull)
+     * @param eMail (Eメール): UQ, NotNull, VARCHAR(216). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Member> selectByUniqueOf(String memberAccount) {
-        return facadeSelectByUniqueOf(memberAccount);
+    public OptionalEntity<Member> selectByUniqueOf(String eMail) {
+        return facadeSelectByUniqueOf(eMail);
     }
 
-    protected OptionalEntity<Member> facadeSelectByUniqueOf(String memberAccount) {
-        return doSelectByUniqueOf(memberAccount, typeOfSelectedEntity());
+    protected OptionalEntity<Member> facadeSelectByUniqueOf(String eMail) {
+        return doSelectByUniqueOf(eMail, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectByUniqueOf(String memberAccount, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(memberAccount), tp), memberAccount);
+    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectByUniqueOf(String eMail, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(eMail), tp), eMail);
     }
 
-    protected MemberCB xprepareCBAsUniqueOf(String memberAccount) {
-        assertObjectNotNull("memberAccount", memberAccount);
-        return newConditionBean().acceptUniqueOf(memberAccount);
+    protected MemberCB xprepareCBAsUniqueOf(String eMail) {
+        assertObjectNotNull("eMail", eMail);
+        return newConditionBean().acceptUniqueOf(eMail);
     }
 
     // ===================================================================================
@@ -400,19 +400,19 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
     }
 
     /**
-     * Load referrer of memberAddressList by the set-upper of referrer. <br>
-     * (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
+     * Load referrer of taskList by the set-upper of referrer. <br>
+     * (タスク)TASK by MEMBER_ID, named 'taskList'.
      * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberAddress</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">addressCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">addressCB</span>.setupSelect...
-     *     <span style="color: #553000">addressCB</span>.query().set...
-     *     <span style="color: #553000">addressCB</span>.query().addOrderBy...
+     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadTask</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">taskCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">taskCB</span>.setupSelect...
+     *     <span style="color: #553000">taskCB</span>.query().set...
+     *     <span style="color: #553000">taskCB</span>.query().addOrderBy...
      * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
      * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
      * <span style="color: #3F7E5E">//    ...</span>
      * <span style="color: #3F7E5E">//});</span>
      * <span style="color: #70226C">for</span> (Member member : <span style="color: #553000">memberList</span>) {
-     *     ... = member.<span style="color: #CC4747">getMemberAddressList()</span>;
+     *     ... = member.<span style="color: #CC4747">getTaskList()</span>;
      * }
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
@@ -425,24 +425,24 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerListGateway<MemberAddress> loadMemberAddress(List<Member> memberList, ReferrerConditionSetupper<MemberAddressCB> refCBLambda) {
+    public NestedReferrerListGateway<Task> loadTask(List<Member> memberList, ReferrerConditionSetupper<TaskCB> refCBLambda) {
         xassLRArg(memberList, refCBLambda);
-        return doLoadMemberAddress(memberList, new LoadReferrerOption<MemberAddressCB, MemberAddress>().xinit(refCBLambda));
+        return doLoadTask(memberList, new LoadReferrerOption<TaskCB, Task>().xinit(refCBLambda));
     }
 
     /**
-     * Load referrer of memberAddressList by the set-upper of referrer. <br>
-     * (会員住所情報)MEMBER_ADDRESS by MEMBER_ID, named 'memberAddressList'.
+     * Load referrer of taskList by the set-upper of referrer. <br>
+     * (タスク)TASK by MEMBER_ID, named 'taskList'.
      * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberAddress</span>(<span style="color: #553000">member</span>, <span style="color: #553000">addressCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">addressCB</span>.setupSelect...
-     *     <span style="color: #553000">addressCB</span>.query().set...
-     *     <span style="color: #553000">addressCB</span>.query().addOrderBy...
+     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadTask</span>(<span style="color: #553000">member</span>, <span style="color: #553000">taskCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">taskCB</span>.setupSelect...
+     *     <span style="color: #553000">taskCB</span>.query().set...
+     *     <span style="color: #553000">taskCB</span>.query().addOrderBy...
      * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
      * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
      * <span style="color: #3F7E5E">//    ...</span>
      * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getMemberAddressList()</span>;
+     * ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getTaskList()</span>;
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has settings before callback as follows:
@@ -454,298 +454,18 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerListGateway<MemberAddress> loadMemberAddress(Member member, ReferrerConditionSetupper<MemberAddressCB> refCBLambda) {
+    public NestedReferrerListGateway<Task> loadTask(Member member, ReferrerConditionSetupper<TaskCB> refCBLambda) {
         xassLRArg(member, refCBLambda);
-        return doLoadMemberAddress(xnewLRLs(member), new LoadReferrerOption<MemberAddressCB, MemberAddress>().xinit(refCBLambda));
+        return doLoadTask(xnewLRLs(member), new LoadReferrerOption<TaskCB, Task>().xinit(refCBLambda));
     }
 
-    protected NestedReferrerListGateway<MemberAddress> doLoadMemberAddress(List<Member> memberList, LoadReferrerOption<MemberAddressCB, MemberAddress> option) {
-        return helpLoadReferrerInternally(memberList, option, "memberAddressList");
-    }
-
-    /**
-     * Load referrer of memberFollowingByMyMemberIdList by the set-upper of referrer. <br>
-     * (会員フォローイング)MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberFollowingByMyMemberId</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">followingCB</span>.setupSelect...
-     *     <span style="color: #553000">followingCB</span>.query().set...
-     *     <span style="color: #553000">followingCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Member member : <span style="color: #553000">memberList</span>) {
-     *     ... = member.<span style="color: #CC4747">getMemberFollowingByMyMemberIdList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setMyMemberId_InScope(pkList);
-     * cb.query().addOrderBy_MyMemberId_Asc();
-     * </pre>
-     * @param memberList The entity list of member. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<MemberFollowing> loadMemberFollowingByMyMemberId(List<Member> memberList, ReferrerConditionSetupper<MemberFollowingCB> refCBLambda) {
-        xassLRArg(memberList, refCBLambda);
-        return doLoadMemberFollowingByMyMemberId(memberList, new LoadReferrerOption<MemberFollowingCB, MemberFollowing>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of memberFollowingByMyMemberIdList by the set-upper of referrer. <br>
-     * (会員フォローイング)MEMBER_FOLLOWING by MY_MEMBER_ID, named 'memberFollowingByMyMemberIdList'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberFollowingByMyMemberId</span>(<span style="color: #553000">member</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">followingCB</span>.setupSelect...
-     *     <span style="color: #553000">followingCB</span>.query().set...
-     *     <span style="color: #553000">followingCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getMemberFollowingByMyMemberIdList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setMyMemberId_InScope(pkList);
-     * cb.query().addOrderBy_MyMemberId_Asc();
-     * </pre>
-     * @param member The entity of member. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<MemberFollowing> loadMemberFollowingByMyMemberId(Member member, ReferrerConditionSetupper<MemberFollowingCB> refCBLambda) {
-        xassLRArg(member, refCBLambda);
-        return doLoadMemberFollowingByMyMemberId(xnewLRLs(member), new LoadReferrerOption<MemberFollowingCB, MemberFollowing>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<MemberFollowing> doLoadMemberFollowingByMyMemberId(List<Member> memberList, LoadReferrerOption<MemberFollowingCB, MemberFollowing> option) {
-        return helpLoadReferrerInternally(memberList, option, "memberFollowingByMyMemberIdList");
-    }
-
-    /**
-     * Load referrer of memberFollowingByYourMemberIdList by the set-upper of referrer. <br>
-     * (会員フォローイング)MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberFollowingByYourMemberId</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">followingCB</span>.setupSelect...
-     *     <span style="color: #553000">followingCB</span>.query().set...
-     *     <span style="color: #553000">followingCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Member member : <span style="color: #553000">memberList</span>) {
-     *     ... = member.<span style="color: #CC4747">getMemberFollowingByYourMemberIdList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setYourMemberId_InScope(pkList);
-     * cb.query().addOrderBy_YourMemberId_Asc();
-     * </pre>
-     * @param memberList The entity list of member. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<MemberFollowing> loadMemberFollowingByYourMemberId(List<Member> memberList, ReferrerConditionSetupper<MemberFollowingCB> refCBLambda) {
-        xassLRArg(memberList, refCBLambda);
-        return doLoadMemberFollowingByYourMemberId(memberList, new LoadReferrerOption<MemberFollowingCB, MemberFollowing>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of memberFollowingByYourMemberIdList by the set-upper of referrer. <br>
-     * (会員フォローイング)MEMBER_FOLLOWING by YOUR_MEMBER_ID, named 'memberFollowingByYourMemberIdList'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberFollowingByYourMemberId</span>(<span style="color: #553000">member</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">followingCB</span>.setupSelect...
-     *     <span style="color: #553000">followingCB</span>.query().set...
-     *     <span style="color: #553000">followingCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getMemberFollowingByYourMemberIdList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setYourMemberId_InScope(pkList);
-     * cb.query().addOrderBy_YourMemberId_Asc();
-     * </pre>
-     * @param member The entity of member. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<MemberFollowing> loadMemberFollowingByYourMemberId(Member member, ReferrerConditionSetupper<MemberFollowingCB> refCBLambda) {
-        xassLRArg(member, refCBLambda);
-        return doLoadMemberFollowingByYourMemberId(xnewLRLs(member), new LoadReferrerOption<MemberFollowingCB, MemberFollowing>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<MemberFollowing> doLoadMemberFollowingByYourMemberId(List<Member> memberList, LoadReferrerOption<MemberFollowingCB, MemberFollowing> option) {
-        return helpLoadReferrerInternally(memberList, option, "memberFollowingByYourMemberIdList");
-    }
-
-    /**
-     * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * (会員ログイン)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">loginCB</span>.setupSelect...
-     *     <span style="color: #553000">loginCB</span>.query().set...
-     *     <span style="color: #553000">loginCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Member member : <span style="color: #553000">memberList</span>) {
-     *     ... = member.<span style="color: #CC4747">getMemberLoginList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setMemberId_InScope(pkList);
-     * cb.query().addOrderBy_MemberId_Asc();
-     * </pre>
-     * @param memberList The entity list of member. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<MemberLogin> loadMemberLogin(List<Member> memberList, ReferrerConditionSetupper<MemberLoginCB> refCBLambda) {
-        xassLRArg(memberList, refCBLambda);
-        return doLoadMemberLogin(memberList, new LoadReferrerOption<MemberLoginCB, MemberLogin>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of memberLoginList by the set-upper of referrer. <br>
-     * (会員ログイン)MEMBER_LOGIN by MEMBER_ID, named 'memberLoginList'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadMemberLogin</span>(<span style="color: #553000">member</span>, <span style="color: #553000">loginCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">loginCB</span>.setupSelect...
-     *     <span style="color: #553000">loginCB</span>.query().set...
-     *     <span style="color: #553000">loginCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getMemberLoginList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setMemberId_InScope(pkList);
-     * cb.query().addOrderBy_MemberId_Asc();
-     * </pre>
-     * @param member The entity of member. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<MemberLogin> loadMemberLogin(Member member, ReferrerConditionSetupper<MemberLoginCB> refCBLambda) {
-        xassLRArg(member, refCBLambda);
-        return doLoadMemberLogin(xnewLRLs(member), new LoadReferrerOption<MemberLoginCB, MemberLogin>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<MemberLogin> doLoadMemberLogin(List<Member> memberList, LoadReferrerOption<MemberLoginCB, MemberLogin> option) {
-        return helpLoadReferrerInternally(memberList, option, "memberLoginList");
-    }
-
-    /**
-     * Load referrer of purchaseList by the set-upper of referrer. <br>
-     * (購入)PURCHASE by MEMBER_ID, named 'purchaseList'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadPurchase</span>(<span style="color: #553000">memberList</span>, <span style="color: #553000">purchaseCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">purchaseCB</span>.setupSelect...
-     *     <span style="color: #553000">purchaseCB</span>.query().set...
-     *     <span style="color: #553000">purchaseCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Member member : <span style="color: #553000">memberList</span>) {
-     *     ... = member.<span style="color: #CC4747">getPurchaseList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setMemberId_InScope(pkList);
-     * cb.query().addOrderBy_MemberId_Asc();
-     * </pre>
-     * @param memberList The entity list of member. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Purchase> loadPurchase(List<Member> memberList, ReferrerConditionSetupper<PurchaseCB> refCBLambda) {
-        xassLRArg(memberList, refCBLambda);
-        return doLoadPurchase(memberList, new LoadReferrerOption<PurchaseCB, Purchase>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of purchaseList by the set-upper of referrer. <br>
-     * (購入)PURCHASE by MEMBER_ID, named 'purchaseList'.
-     * <pre>
-     * <span style="color: #0000C0">memberBhv</span>.<span style="color: #CC4747">loadPurchase</span>(<span style="color: #553000">member</span>, <span style="color: #553000">purchaseCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">purchaseCB</span>.setupSelect...
-     *     <span style="color: #553000">purchaseCB</span>.query().set...
-     *     <span style="color: #553000">purchaseCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">member</span>.<span style="color: #CC4747">getPurchaseList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setMemberId_InScope(pkList);
-     * cb.query().addOrderBy_MemberId_Asc();
-     * </pre>
-     * @param member The entity of member. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Purchase> loadPurchase(Member member, ReferrerConditionSetupper<PurchaseCB> refCBLambda) {
-        xassLRArg(member, refCBLambda);
-        return doLoadPurchase(xnewLRLs(member), new LoadReferrerOption<PurchaseCB, Purchase>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<Purchase> doLoadPurchase(List<Member> memberList, LoadReferrerOption<PurchaseCB, Purchase> option) {
-        return helpLoadReferrerInternally(memberList, option, "purchaseList");
+    protected NestedReferrerListGateway<Task> doLoadTask(List<Member> memberList, LoadReferrerOption<TaskCB, Task> option) {
+        return helpLoadReferrerInternally(memberList, option, "taskList");
     }
 
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
-    /**
-     * Pull out the list of foreign table 'MemberStatus'.
-     * @param memberList The list of member. (NotNull, EmptyAllowed)
-     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<MemberStatus> pulloutMemberStatus(List<Member> memberList)
-    { return helpPulloutInternally(memberList, "memberStatus"); }
-
-    /**
-     * Pull out the list of foreign table 'MemberAddress'.
-     * @param memberList The list of member. (NotNull, EmptyAllowed)
-     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<MemberAddress> pulloutMemberAddressAsValid(List<Member> memberList)
-    { return helpPulloutInternally(memberList, "memberAddressAsValid"); }
-
-    /**
-     * Pull out the list of foreign table 'MemberLogin'.
-     * @param memberList The list of member. (NotNull, EmptyAllowed)
-     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<MemberLogin> pulloutMemberLoginAsLatest(List<Member> memberList)
-    { return helpPulloutInternally(memberList, "memberLoginAsLatest"); }
-
     /**
      * Pull out the list of referrer-as-one table 'MemberSecurity'.
      * @param memberList The list of member. (NotNull, EmptyAllowed)
@@ -753,22 +473,6 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      */
     public List<MemberSecurity> pulloutMemberSecurityAsOne(List<Member> memberList)
     { return helpPulloutInternally(memberList, "memberSecurityAsOne"); }
-
-    /**
-     * Pull out the list of referrer-as-one table 'MemberService'.
-     * @param memberList The list of member. (NotNull, EmptyAllowed)
-     * @return The list of referrer-as-one table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<MemberService> pulloutMemberServiceAsOne(List<Member> memberList)
-    { return helpPulloutInternally(memberList, "memberServiceAsOne"); }
-
-    /**
-     * Pull out the list of referrer-as-one table 'MemberWithdrawal'.
-     * @param memberList The list of member. (NotNull, EmptyAllowed)
-     * @return The list of referrer-as-one table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<MemberWithdrawal> pulloutMemberWithdrawalAsOne(List<Member> memberList)
-    { return helpPulloutInternally(memberList, "memberWithdrawalAsOne"); }
 
     // ===================================================================================
     //                                                                      Extract Column
@@ -778,16 +482,16 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      * @param memberList The list of member. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractMemberIdList(List<Member> memberList)
+    public List<Long> extractMemberIdList(List<Member> memberList)
     { return helpExtractListInternally(memberList, "memberId"); }
 
     /**
-     * Extract the value list of (single) unique key memberAccount.
+     * Extract the value list of (single) unique key eMail.
      * @param memberList The list of member. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<String> extractMemberAccountList(List<Member> memberList)
-    { return helpExtractListInternally(memberList, "memberAccount"); }
+    public List<String> extractEMailList(List<Member> memberList)
+    { return helpExtractListInternally(memberList, "EMail"); }
 
     // ===================================================================================
     //                                                                       Entity Update

@@ -60,14 +60,14 @@ public class SigninAction extends TodostackBaseAction {
     }
 
     private void moreValidate(SigninForm form, TodostackMessages messages) {
-        if (LaStringUtil.isNotEmpty(form.account) && LaStringUtil.isNotEmpty(form.password)) {
+        if (LaStringUtil.isNotEmpty(form.email) && LaStringUtil.isNotEmpty(form.password)) {
             if (!loginAssist.checkUserLoginable(createCredential(form))) {
-                messages.addErrorsLoginFailure("account");
+                messages.addErrorsLoginFailure("email");
             }
         }
     }
 
     private UserPasswordCredential createCredential(SigninForm form) {
-        return new UserPasswordCredential(form.account, form.password);
+        return new UserPasswordCredential(form.email, form.password);
     }
 }

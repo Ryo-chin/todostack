@@ -35,13 +35,13 @@ import com.todostack.dbflute.bsentity.dbmeta.*;
 import com.todostack.dbflute.cbean.*;
 
 /**
- * The behavior of (会員セキュリティ情報)MEMBER_SECURITY as TABLE. <br>
+ * The behavior of (会員セキュリティ)MEMBER_SECURITY as TABLE. <br>
  * <pre>
  * [primary key]
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, LOGIN_PASSWORD, REMINDER_QUESTION, REMINDER_ANSWER, REMINDER_USE_COUNT, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_ID, LOGIN_PASSWORD, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -172,29 +172,29 @@ public abstract class BsMemberSecurityBhv extends AbstractBehaviorWritable<Membe
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId (会員ID): PK, NotNull, INTEGER(10), FK to MEMBER. (NotNull)
+     * @param memberId (会員ID): PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER. (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<MemberSecurity> selectByPK(Integer memberId) {
+    public OptionalEntity<MemberSecurity> selectByPK(Long memberId) {
         return facadeSelectByPK(memberId);
     }
 
-    protected OptionalEntity<MemberSecurity> facadeSelectByPK(Integer memberId) {
+    protected OptionalEntity<MemberSecurity> facadeSelectByPK(Long memberId) {
         return doSelectOptionalByPK(memberId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberSecurity> ENTITY doSelectByPK(Integer memberId, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends MemberSecurity> ENTITY doSelectByPK(Long memberId, Class<? extends ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(memberId), tp);
     }
 
-    protected <ENTITY extends MemberSecurity> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer memberId, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends MemberSecurity> OptionalEntity<ENTITY> doSelectOptionalByPK(Long memberId, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(memberId, tp), memberId);
     }
 
-    protected MemberSecurityCB xprepareCBAsPK(Integer memberId) {
+    protected MemberSecurityCB xprepareCBAsPK(Long memberId) {
         assertObjectNotNull("memberId", memberId);
         return newConditionBean().acceptPK(memberId);
     }
@@ -393,7 +393,7 @@ public abstract class BsMemberSecurityBhv extends AbstractBehaviorWritable<Membe
      * @param memberSecurityList The list of memberSecurity. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractMemberIdList(List<MemberSecurity> memberSecurityList)
+    public List<Long> extractMemberIdList(List<MemberSecurity> memberSecurityList)
     { return helpExtractListInternally(memberSecurityList, "memberId"); }
 
     // ===================================================================================

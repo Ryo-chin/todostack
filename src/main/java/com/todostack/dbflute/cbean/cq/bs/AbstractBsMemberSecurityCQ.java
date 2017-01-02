@@ -60,63 +60,63 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param memberId The value of memberId as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setMemberId_Equal(Integer memberId) {
+    public void setMemberId_Equal(Long memberId) {
         doSetMemberId_Equal(memberId);
     }
 
-    protected void doSetMemberId_Equal(Integer memberId) {
+    protected void doSetMemberId_Equal(Long memberId) {
         regMemberId(CK_EQ, memberId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param memberId The value of memberId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setMemberId_NotEqual(Integer memberId) {
+    public void setMemberId_NotEqual(Long memberId) {
         doSetMemberId_NotEqual(memberId);
     }
 
-    protected void doSetMemberId_NotEqual(Integer memberId) {
+    protected void doSetMemberId_NotEqual(Long memberId) {
         regMemberId(CK_NES, memberId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param memberId The value of memberId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setMemberId_GreaterThan(Integer memberId) {
+    public void setMemberId_GreaterThan(Long memberId) {
         regMemberId(CK_GT, memberId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param memberId The value of memberId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setMemberId_LessThan(Integer memberId) {
+    public void setMemberId_LessThan(Long memberId) {
         regMemberId(CK_LT, memberId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param memberId The value of memberId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setMemberId_GreaterEqual(Integer memberId) {
+    public void setMemberId_GreaterEqual(Long memberId) {
         regMemberId(CK_GE, memberId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param memberId The value of memberId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setMemberId_LessEqual(Integer memberId) {
+    public void setMemberId_LessEqual(Long memberId) {
         regMemberId(CK_LE, memberId);
     }
 
@@ -124,12 +124,12 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param minNumber The min number of memberId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of memberId. (NullAllowed: if null, no to-condition)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setMemberId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+    public void setMemberId_RangeOf(Long minNumber, Long maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
         setMemberId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
@@ -137,50 +137,50 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param minNumber The min number of memberId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of memberId. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setMemberId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+    protected void setMemberId_RangeOf(Long minNumber, Long maxNumber, RangeOfOption rangeOfOption) {
         regROO(minNumber, maxNumber, xgetCValueMemberId(), "MEMBER_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param memberIdList The collection of memberId as inScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setMemberId_InScope(Collection<Integer> memberIdList) {
+    public void setMemberId_InScope(Collection<Long> memberIdList) {
         doSetMemberId_InScope(memberIdList);
     }
 
-    protected void doSetMemberId_InScope(Collection<Integer> memberIdList) {
+    protected void doSetMemberId_InScope(Collection<Long> memberIdList) {
         regINS(CK_INS, cTL(memberIdList), xgetCValueMemberId(), "MEMBER_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @param memberIdList The collection of memberId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setMemberId_NotInScope(Collection<Integer> memberIdList) {
+    public void setMemberId_NotInScope(Collection<Long> memberIdList) {
         doSetMemberId_NotInScope(memberIdList);
     }
 
-    protected void doSetMemberId_NotInScope(Collection<Integer> memberIdList) {
+    protected void doSetMemberId_NotInScope(Collection<Long> memberIdList) {
         regINS(CK_NINS, cTL(memberIdList), xgetCValueMemberId(), "MEMBER_ID");
     }
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      */
     public void setMemberId_IsNull() { regMemberId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      */
     public void setMemberId_IsNotNull() { regMemberId(CK_ISNN, DOBJ); }
 
@@ -287,323 +287,8 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
     protected abstract ConditionValue xgetCValueLoginPassword();
 
     /**
-     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)}
-     * @param reminderQuestion The value of reminderQuestion as equal. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderQuestion_Equal(String reminderQuestion) {
-        doSetReminderQuestion_Equal(fRES(reminderQuestion));
-    }
-
-    protected void doSetReminderQuestion_Equal(String reminderQuestion) {
-        regReminderQuestion(CK_EQ, reminderQuestion);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)}
-     * @param reminderQuestion The value of reminderQuestion as notEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderQuestion_NotEqual(String reminderQuestion) {
-        doSetReminderQuestion_NotEqual(fRES(reminderQuestion));
-    }
-
-    protected void doSetReminderQuestion_NotEqual(String reminderQuestion) {
-        regReminderQuestion(CK_NES, reminderQuestion);
-    }
-
-    /**
-     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)}
-     * @param reminderQuestionList The collection of reminderQuestion as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderQuestion_InScope(Collection<String> reminderQuestionList) {
-        doSetReminderQuestion_InScope(reminderQuestionList);
-    }
-
-    protected void doSetReminderQuestion_InScope(Collection<String> reminderQuestionList) {
-        regINS(CK_INS, cTL(reminderQuestionList), xgetCValueReminderQuestion(), "REMINDER_QUESTION");
-    }
-
-    /**
-     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)}
-     * @param reminderQuestionList The collection of reminderQuestion as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderQuestion_NotInScope(Collection<String> reminderQuestionList) {
-        doSetReminderQuestion_NotInScope(reminderQuestionList);
-    }
-
-    protected void doSetReminderQuestion_NotInScope(Collection<String> reminderQuestionList) {
-        regINS(CK_NINS, cTL(reminderQuestionList), xgetCValueReminderQuestion(), "REMINDER_QUESTION");
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)} <br>
-     * <pre>e.g. setReminderQuestion_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param reminderQuestion The value of reminderQuestion as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setReminderQuestion_LikeSearch(String reminderQuestion, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setReminderQuestion_LikeSearch(reminderQuestion, xcLSOP(opLambda));
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)} <br>
-     * <pre>e.g. setReminderQuestion_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param reminderQuestion The value of reminderQuestion as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    protected void setReminderQuestion_LikeSearch(String reminderQuestion, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(reminderQuestion), xgetCValueReminderQuestion(), "REMINDER_QUESTION", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)}
-     * @param reminderQuestion The value of reminderQuestion as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setReminderQuestion_NotLikeSearch(String reminderQuestion, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setReminderQuestion_NotLikeSearch(reminderQuestion, xcLSOP(opLambda));
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)}
-     * @param reminderQuestion The value of reminderQuestion as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    protected void setReminderQuestion_NotLikeSearch(String reminderQuestion, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(reminderQuestion), xgetCValueReminderQuestion(), "REMINDER_QUESTION", likeSearchOption);
-    }
-
-    protected void regReminderQuestion(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueReminderQuestion(), "REMINDER_QUESTION"); }
-    protected abstract ConditionValue xgetCValueReminderQuestion();
-
-    /**
-     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)}
-     * @param reminderAnswer The value of reminderAnswer as equal. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderAnswer_Equal(String reminderAnswer) {
-        doSetReminderAnswer_Equal(fRES(reminderAnswer));
-    }
-
-    protected void doSetReminderAnswer_Equal(String reminderAnswer) {
-        regReminderAnswer(CK_EQ, reminderAnswer);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)}
-     * @param reminderAnswer The value of reminderAnswer as notEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderAnswer_NotEqual(String reminderAnswer) {
-        doSetReminderAnswer_NotEqual(fRES(reminderAnswer));
-    }
-
-    protected void doSetReminderAnswer_NotEqual(String reminderAnswer) {
-        regReminderAnswer(CK_NES, reminderAnswer);
-    }
-
-    /**
-     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)}
-     * @param reminderAnswerList The collection of reminderAnswer as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderAnswer_InScope(Collection<String> reminderAnswerList) {
-        doSetReminderAnswer_InScope(reminderAnswerList);
-    }
-
-    protected void doSetReminderAnswer_InScope(Collection<String> reminderAnswerList) {
-        regINS(CK_INS, cTL(reminderAnswerList), xgetCValueReminderAnswer(), "REMINDER_ANSWER");
-    }
-
-    /**
-     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)}
-     * @param reminderAnswerList The collection of reminderAnswer as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderAnswer_NotInScope(Collection<String> reminderAnswerList) {
-        doSetReminderAnswer_NotInScope(reminderAnswerList);
-    }
-
-    protected void doSetReminderAnswer_NotInScope(Collection<String> reminderAnswerList) {
-        regINS(CK_NINS, cTL(reminderAnswerList), xgetCValueReminderAnswer(), "REMINDER_ANSWER");
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)} <br>
-     * <pre>e.g. setReminderAnswer_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param reminderAnswer The value of reminderAnswer as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setReminderAnswer_LikeSearch(String reminderAnswer, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setReminderAnswer_LikeSearch(reminderAnswer, xcLSOP(opLambda));
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)} <br>
-     * <pre>e.g. setReminderAnswer_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param reminderAnswer The value of reminderAnswer as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    protected void setReminderAnswer_LikeSearch(String reminderAnswer, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(reminderAnswer), xgetCValueReminderAnswer(), "REMINDER_ANSWER", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)}
-     * @param reminderAnswer The value of reminderAnswer as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setReminderAnswer_NotLikeSearch(String reminderAnswer, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setReminderAnswer_NotLikeSearch(reminderAnswer, xcLSOP(opLambda));
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)}
-     * @param reminderAnswer The value of reminderAnswer as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    protected void setReminderAnswer_NotLikeSearch(String reminderAnswer, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(reminderAnswer), xgetCValueReminderAnswer(), "REMINDER_ANSWER", likeSearchOption);
-    }
-
-    protected void regReminderAnswer(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueReminderAnswer(), "REMINDER_ANSWER"); }
-    protected abstract ConditionValue xgetCValueReminderAnswer();
-
-    /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param reminderUseCount The value of reminderUseCount as equal. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setReminderUseCount_Equal(Integer reminderUseCount) {
-        doSetReminderUseCount_Equal(reminderUseCount);
-    }
-
-    protected void doSetReminderUseCount_Equal(Integer reminderUseCount) {
-        regReminderUseCount(CK_EQ, reminderUseCount);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param reminderUseCount The value of reminderUseCount as notEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setReminderUseCount_NotEqual(Integer reminderUseCount) {
-        doSetReminderUseCount_NotEqual(reminderUseCount);
-    }
-
-    protected void doSetReminderUseCount_NotEqual(Integer reminderUseCount) {
-        regReminderUseCount(CK_NES, reminderUseCount);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param reminderUseCount The value of reminderUseCount as greaterThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setReminderUseCount_GreaterThan(Integer reminderUseCount) {
-        regReminderUseCount(CK_GT, reminderUseCount);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param reminderUseCount The value of reminderUseCount as lessThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setReminderUseCount_LessThan(Integer reminderUseCount) {
-        regReminderUseCount(CK_LT, reminderUseCount);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param reminderUseCount The value of reminderUseCount as greaterEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setReminderUseCount_GreaterEqual(Integer reminderUseCount) {
-        regReminderUseCount(CK_GE, reminderUseCount);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param reminderUseCount The value of reminderUseCount as lessEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setReminderUseCount_LessEqual(Integer reminderUseCount) {
-        regReminderUseCount(CK_LE, reminderUseCount);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param minNumber The min number of reminderUseCount. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of reminderUseCount. (NullAllowed: if null, no to-condition)
-     * @param opLambda The callback for option of range-of. (NotNull)
-     */
-    public void setReminderUseCount_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setReminderUseCount_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param minNumber The min number of reminderUseCount. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of reminderUseCount. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    protected void setReminderUseCount_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueReminderUseCount(), "REMINDER_USE_COUNT", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param reminderUseCountList The collection of reminderUseCount as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderUseCount_InScope(Collection<Integer> reminderUseCountList) {
-        doSetReminderUseCount_InScope(reminderUseCountList);
-    }
-
-    protected void doSetReminderUseCount_InScope(Collection<Integer> reminderUseCountList) {
-        regINS(CK_INS, cTL(reminderUseCountList), xgetCValueReminderUseCount(), "REMINDER_USE_COUNT");
-    }
-
-    /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @param reminderUseCountList The collection of reminderUseCount as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setReminderUseCount_NotInScope(Collection<Integer> reminderUseCountList) {
-        doSetReminderUseCount_NotInScope(reminderUseCountList);
-    }
-
-    protected void doSetReminderUseCount_NotInScope(Collection<Integer> reminderUseCountList) {
-        regINS(CK_NINS, cTL(reminderUseCountList), xgetCValueReminderUseCount(), "REMINDER_USE_COUNT");
-    }
-
-    protected void regReminderUseCount(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueReminderUseCount(), "REMINDER_USE_COUNT"); }
-    protected abstract ConditionValue xgetCValueReminderUseCount();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @param registerDatetime The value of registerDatetime as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setRegisterDatetime_Equal(java.time.LocalDateTime registerDatetime) {
@@ -613,7 +298,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * <pre>e.g. setRegisterDatetime_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
      * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
@@ -626,7 +311,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * <pre>e.g. setRegisterDatetime_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
      * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
@@ -642,7 +327,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * REGISTER_USER: {NotNull, VARCHAR(200)}
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
      * @param registerUser The value of registerUser as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setRegisterUser_Equal(String registerUser) {
@@ -658,7 +343,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @param updateDatetime The value of updateDatetime as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setUpdateDatetime_Equal(java.time.LocalDateTime updateDatetime) {
@@ -668,7 +353,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
      * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
@@ -681,7 +366,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
      * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
@@ -697,7 +382,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * UPDATE_USER: {NotNull, VARCHAR(200)}
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
      * @param updateUser The value of updateUser as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setUpdateUser_Equal(String updateUser) {
@@ -713,7 +398,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * VERSION_NO: {NotNull, BIGINT(19)}
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT(19)}
      * @param versionNo The value of versionNo as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setVersionNo_Equal(Long versionNo) {
@@ -728,7 +413,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * VERSION_NO: {NotNull, BIGINT(19)}
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT(19)}
      * @param minNumber The min number of versionNo. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of versionNo. (NullAllowed: if null, no to-condition)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -741,7 +426,7 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * VERSION_NO: {NotNull, BIGINT(19)}
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT(19)}
      * @param minNumber The min number of versionNo. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of versionNo. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -795,7 +480,6 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
      * </pre> 
-     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<MemberSecurityCB> scalar_GreaterThan() {
@@ -811,7 +495,6 @@ public abstract class AbstractBsMemberSecurityCQ extends AbstractConditionQuery 
      *     <span style="color: #553000">purchaseCB</span>.query().setPaymentCompleteFlg_Equal_True();
      * });
      * </pre> 
-     * </pre>
      * @return The object to set up a function. (NotNull)
      */
     public HpSLCFunction<MemberSecurityCB> scalar_LessThan() {

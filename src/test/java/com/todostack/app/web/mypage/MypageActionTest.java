@@ -25,12 +25,7 @@ public class MypageActionTest extends UnitTodostackTestCase {
 
         // ## Assert ##
         TestingHtmlData data = validateHtmlData(response);
-        log("Recent:");
-        data.requiredList("recentProducts", MypageProductBean.class).forEach(bean -> {
-            log(bean);
-        });
-        log("High-Price:");
-        data.requiredList("highPriceProducts", MypageProductBean.class).forEach(bean -> {
+        data.requiredList("recentProducts", MyPageTaskBean.class).forEach(bean -> {
             log(bean);
         });
     }

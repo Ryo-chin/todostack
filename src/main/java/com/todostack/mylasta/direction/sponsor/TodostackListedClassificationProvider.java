@@ -44,7 +44,8 @@ public class TodostackListedClassificationProvider extends TypicalListedClassifi
     protected Function<String, ClassificationMeta> getDefaultClassificationFinder() {
         return clsName -> {
             return onMainSchema(clsName).orElseGet(() -> {
-                return onAppCls(clsName).orElse(null); // null means not found
+                return null;
+//                return onAppCls(clsName).orElse(null); // null means not found
             });
         };
     }
@@ -53,7 +54,8 @@ public class TodostackListedClassificationProvider extends TypicalListedClassifi
         return findMeta(CDef.DefMeta.class, clsName);
     }
 
-    protected OptionalThing<ClassificationMeta> onAppCls(String clsName) {
-        return findMeta(AppCDef.DefMeta.class, clsName);
-    }
+    // TODO: 2017/01/02 必要なら実装する
+//    protected OptionalThing<ClassificationMeta> onAppCls(String clsName) {
+//        return findMeta(AppCDef.DefMeta.class, clsName);
+//    }
 }

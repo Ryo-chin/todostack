@@ -69,25 +69,22 @@ public class MemberCQ extends BsMemberCQ {
             String msg = "The argument 'cipheredPassword' should not be null or empty: " + cipheredPassword;
             throw new IllegalArgumentException(msg);
         }
-        setMemberAccount_Equal(email); // member account (the database has no email)
+        setEMail_Equal(email);
         queryMemberSecurityAsOne().setLoginPassword_Equal(cipheredPassword);
-        setMemberStatusCode_InScope_ServiceAvailable();
     }
 
     /**
      * Arrange member login query by identity.
      * <pre>
-     * o match member ID
-     * o member status is service available
+     * o match email
      * </pre>
-     * @param memberId The ID of the login member. (NotNull)
+     * @param email The ID of the login member. (NotNull)
      */
-    public void arrangeLoginByIdentity(Integer memberId) {
-        if (memberId == null) {
-            String msg = "The argument 'memberId' should not be null.";
+    public void arrangeLoginByIdentity(String email) {
+        if (email == null) {
+            String msg = "The argument 'email' should not be null.";
             throw new IllegalArgumentException(msg);
         }
-        setMemberId_Equal(memberId);
-        setMemberStatusCode_InScope_ServiceAvailable();
+        setEMail_Equal(email);
     }
 }

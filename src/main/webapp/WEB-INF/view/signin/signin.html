@@ -39,9 +39,9 @@
 		<form class="signin-form" th:action="@{/signin/}" action="#" method="post">
 			<ul>
 				<li>
-					<span th:text="#{labels.account}">labels.account</span>
-					<input type="text" name="account" th:value="${account}" th:placeholder="#{labels.signin.input.account}"/>
-					<span la:errors="account"/>
+					<span th:text="#{labels.email}">labels.account</span>
+					<input type="text" name="email" th:value="${email}" th:placeholder="#{labels.signin.input.email}"/>
+					<span la:errors="email"/>
 				</li>
 				<li>
 					<span th:text="#{labels.password}">labels.password</span>

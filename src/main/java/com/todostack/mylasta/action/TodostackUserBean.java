@@ -16,12 +16,13 @@
 package com.todostack.mylasta.action;
 
 import com.todostack.dbflute.exentity.Member;
+
 import org.lastaflute.web.login.TypicalUserBean;
 
 /**
  * @author jflute
  */
-public class TodostackUserBean extends TypicalUserBean<Integer> { // #change_it also LoginAssist
+public class TodostackUserBean extends TypicalUserBean<String> { // #change_it also LoginAssist
 
     // ===================================================================================
     //                                                                          Definition
@@ -32,33 +33,38 @@ public class TodostackUserBean extends TypicalUserBean<Integer> { // #change_it 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected final Integer memberId;
-    protected final String memberName;
+    protected final Long memberId;
+    protected final String memberAccount;
+    protected final String email;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
     public TodostackUserBean(Member member) {
         memberId = member.getMemberId();
-        memberName = member.getMemberName();
+        memberAccount = member.getMemberAccount();
+        email = member.getEMail();
     }
 
     // ===================================================================================
     //                                                                      Implementation
     //                                                                      ==============
-    @Override
-    public Integer getUserId() {
-        return getMemberId();
+    public String getUserId() {
+        return getEmail();
     }
 
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public Integer getMemberId() {
+    public Long getMemberId() {
         return memberId;
     }
 
-    public String getMemberName() {
-        return memberName;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getMemberAccount() {
+        return memberAccount;
     }
 }

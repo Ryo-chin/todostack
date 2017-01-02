@@ -24,7 +24,7 @@ import org.lastaflute.web.validation.Required;
 public class SigninForm {
 
     @Required
-    public String account;
+    public String email;
 
     @Required
     public String password;

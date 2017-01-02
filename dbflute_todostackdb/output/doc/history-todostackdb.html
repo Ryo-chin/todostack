@@ -112,18 +112,120 @@ p.tablecount {
 </head>
 
 <body>
-<h1>History for todostackdb (h2)</h1>
+<h1>History for todostackdb (mysql)</h1>
 <div class="navilinkarea">
 <p class="sisterlink"><a href="./schema-todostackdb.html">to SchemaHTML</a></p>
 <p class="sistersublink"><a href="./properties-todostackdb.html">to PropertiesHTML</a></p>
 </div>
 
 <div class="section">
+	<h2><span class="dt">Diff Date: </span>2017/01/02 13:56:02</h2>
+	<p class="tablecount"><span class="dt">table count: </span>16&nbsp;-&gt;&nbsp;4</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li><a href="./schema-todostackdb.html#task">TASK</a></li>
+		<li><a href="./schema-todostackdb.html#task_work">TASK_WORK</a></li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-todostackdb.html#member">MEMBER</a></h4>
+		<div class="change-table-content">
+			<h5>Schema</h5>
+			<div class="column-content">MAIHAMADB.PUBLIC&nbsp;-&gt;&nbsp;todostackdb</div>
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>E_MAIL</li>
+			</ul>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>MEMBER_ID</dt>
+				<dd><span>Type</span>INTEGER&nbsp;-&gt;&nbsp;BIGINT&nbsp;UNSIGNED</dd>
+				<dd><span>Size</span>10&nbsp;-&gt;&nbsp;20</dd>
+				<dd><span>Default</span>NEXT&nbsp;VALUE&nbsp;FOR&nbsp;PUBLIC.SYSTEM_SEQUENCE_EA6AF347_9830_48E7_A80E_3918BAF1709F&nbsp;-&gt;&nbsp;null</dd>
+				<dt>MEMBER_ACCOUNT</dt>
+				<dd><span>Size</span>50&nbsp;-&gt;&nbsp;100</dd>
+				<dt>REGISTER_DATETIME</dt>
+				<dd><span>Type</span>TIMESTAMP&nbsp;-&gt;&nbsp;DATETIME</dd>
+				<dd><span>Size</span>23,&nbsp;10&nbsp;-&gt;&nbsp;19</dd>
+				<dt>UPDATE_DATETIME</dt>
+				<dd><span>Type</span>TIMESTAMP&nbsp;-&gt;&nbsp;DATETIME</dd>
+				<dd><span>Size</span>23,&nbsp;10&nbsp;-&gt;&nbsp;19</dd>
+			</dl>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_NAME</li>
+				<li>MEMBER_STATUS_CODE</li>
+				<li>FORMALIZED_DATETIME</li>
+				<li>BIRTHDATE</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>FK_MEMBER_MEMBER_STATUS</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>E_MAIL</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>UQ_MEMBER_MEMBER_ACCOUNT_INDEX_8</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>FK_MEMBER_MEMBER_STATUS_INDEX_8</li>
+				<li>IX_MEMBER_FORMALIZED_DATETIME</li>
+				<li>IX_MEMBER_MEMBER_NAME</li>
+			</ul>
+		</div>
+		<h4><a href="./schema-todostackdb.html#member_security">MEMBER_SECURITY</a></h4>
+		<div class="change-table-content">
+			<h5>Schema</h5>
+			<div class="column-content">MAIHAMADB.PUBLIC&nbsp;-&gt;&nbsp;todostackdb</div>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>MEMBER_ID</dt>
+				<dd><span>Type</span>INTEGER&nbsp;-&gt;&nbsp;BIGINT&nbsp;UNSIGNED</dd>
+				<dd><span>Size</span>10&nbsp;-&gt;&nbsp;20</dd>
+				<dt>REGISTER_DATETIME</dt>
+				<dd><span>Type</span>TIMESTAMP&nbsp;-&gt;&nbsp;DATETIME</dd>
+				<dd><span>Size</span>23,&nbsp;10&nbsp;-&gt;&nbsp;19</dd>
+				<dt>UPDATE_DATETIME</dt>
+				<dd><span>Type</span>TIMESTAMP&nbsp;-&gt;&nbsp;DATETIME</dd>
+				<dd><span>Size</span>23,&nbsp;10&nbsp;-&gt;&nbsp;19</dd>
+			</dl>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>REMINDER_QUESTION</li>
+				<li>REMINDER_ANSWER</li>
+				<li>REMINDER_USE_COUNT</li>
+			</ul>
+		</div>
+	</div>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>MEMBER_ADDRESS</li>
+		<li>MEMBER_FOLLOWING</li>
+		<li>MEMBER_LOGIN</li>
+		<li>MEMBER_SERVICE</li>
+		<li>MEMBER_STATUS</li>
+		<li>MEMBER_WITHDRAWAL</li>
+		<li>PRODUCT</li>
+		<li>PRODUCT_CATEGORY</li>
+		<li>PRODUCT_STATUS</li>
+		<li>PURCHASE</li>
+		<li>PURCHASE_PAYMENT</li>
+		<li>REGION</li>
+		<li>SERVICE_RANK</li>
+		<li>WITHDRAWAL_REASON</li>
+	</ul>
+</div>
+<div class="section">
 	<h2><span class="dt">Diff Date: </span>2015/12/02 23:48:43</h2>
 
 	<h3>Change Table</h3>
 	<div class="table-content">
-		<h4><a href="./schema-todostackdb.html#member">MEMBER</a></h4>
+		<h4>MEMBER</h4>
 		<div class="change-table-content">
 			<h5>Change Column</h5>
 			<dl class="column-content">

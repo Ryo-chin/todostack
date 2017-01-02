@@ -58,11 +58,8 @@ public class MemberSecurityDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((MemberSecurity)et).getMemberId(), (et, vl) -> ((MemberSecurity)et).setMemberId(cti(vl)), "memberId");
+        setupEpg(_epgMap, et -> ((MemberSecurity)et).getMemberId(), (et, vl) -> ((MemberSecurity)et).setMemberId(ctl(vl)), "memberId");
         setupEpg(_epgMap, et -> ((MemberSecurity)et).getLoginPassword(), (et, vl) -> ((MemberSecurity)et).setLoginPassword((String)vl), "loginPassword");
-        setupEpg(_epgMap, et -> ((MemberSecurity)et).getReminderQuestion(), (et, vl) -> ((MemberSecurity)et).setReminderQuestion((String)vl), "reminderQuestion");
-        setupEpg(_epgMap, et -> ((MemberSecurity)et).getReminderAnswer(), (et, vl) -> ((MemberSecurity)et).setReminderAnswer((String)vl), "reminderAnswer");
-        setupEpg(_epgMap, et -> ((MemberSecurity)et).getReminderUseCount(), (et, vl) -> ((MemberSecurity)et).setReminderUseCount(cti(vl)), "reminderUseCount");
         setupEpg(_epgMap, et -> ((MemberSecurity)et).getRegisterDatetime(), (et, vl) -> ((MemberSecurity)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((MemberSecurity)et).getRegisterUser(), (et, vl) -> ((MemberSecurity)et).setRegisterUser((String)vl), "registerUser");
         setupEpg(_epgMap, et -> ((MemberSecurity)et).getUpdateDatetime(), (et, vl) -> ((MemberSecurity)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
@@ -96,25 +93,22 @@ public class MemberSecurityDbm extends AbstractDBMeta {
     public String getTableDispName() { return _tableDispName; }
     public String getTablePropertyName() { return _tablePropertyName; }
     public TableSqlName getTableSqlName() { return _tableSqlName; }
-    protected final String _tableAlias = "会員セキュリティ情報";
+    protected final String _tableAlias = "会員セキュリティ";
     public String getTableAlias() { return _tableAlias; }
 
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, true, false, true, "INTEGER", 10, 0, null, false, null, null, "member", null, null, false);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Long.class, "memberId", null, true, false, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, "member", null, null, false);
     protected final ColumnInfo _columnLoginPassword = cci("LOGIN_PASSWORD", "LOGIN_PASSWORD", null, "ログインパスワード", String.class, "loginPassword", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnReminderQuestion = cci("REMINDER_QUESTION", "REMINDER_QUESTION", null, "リマインダ質問", String.class, "reminderQuestion", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnReminderAnswer = cci("REMINDER_ANSWER", "REMINDER_ANSWER", null, "リマインダ回答", String.class, "reminderAnswer", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnReminderUseCount = cci("REMINDER_USE_COUNT", "REMINDER_USE_COUNT", null, "リマインダ利用回数", Integer.class, "reminderUseCount", null, false, false, true, "INTEGER", 10, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, null, String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "TIMESTAMP", 23, 10, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, null, String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
-    protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, null, Long.class, "versionNo", null, false, false, true, "BIGINT", 19, 0, null, false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, "更新ユーザー", String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT", 19, 0, null, false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
-     * (会員ID)MEMBER_ID: {PK, NotNull, INTEGER(10), FK to MEMBER}
+     * (会員ID)MEMBER_ID: {PK, NotNull, BIGINT UNSIGNED(20), FK to MEMBER}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
@@ -124,42 +118,27 @@ public class MemberSecurityDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnLoginPassword() { return _columnLoginPassword; }
     /**
-     * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnReminderQuestion() { return _columnReminderQuestion; }
-    /**
-     * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnReminderAnswer() { return _columnReminderAnswer; }
-    /**
-     * (リマインダ利用回数)REMINDER_USE_COUNT: {NotNull, INTEGER(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnReminderUseCount() { return _columnReminderUseCount; }
-    /**
-     * REGISTER_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRegisterDatetime() { return _columnRegisterDatetime; }
     /**
-     * REGISTER_USER: {NotNull, VARCHAR(200)}
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRegisterUser() { return _columnRegisterUser; }
     /**
-     * UPDATE_DATETIME: {NotNull, TIMESTAMP(23, 10)}
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }
     /**
-     * UPDATE_USER: {NotNull, VARCHAR(200)}
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUpdateUser() { return _columnUpdateUser; }
     /**
-     * VERSION_NO: {NotNull, BIGINT(19)}
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT(19)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnVersionNo() { return _columnVersionNo; }
@@ -168,9 +147,6 @@ public class MemberSecurityDbm extends AbstractDBMeta {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnMemberId());
         ls.add(columnLoginPassword());
-        ls.add(columnReminderQuestion());
-        ls.add(columnReminderAnswer());
-        ls.add(columnReminderUseCount());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());
         ls.add(columnUpdateDatetime());

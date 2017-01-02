@@ -14,19 +14,7 @@
 
 	<!-- The components of Behavior. -->
 	<component name="memberBhv" class="com.todostack.dbflute.exbhv.MemberBhv"/>
-	<component name="memberAddressBhv" class="com.todostack.dbflute.exbhv.MemberAddressBhv"/>
-	<component name="memberFollowingBhv" class="com.todostack.dbflute.exbhv.MemberFollowingBhv"/>
-	<component name="memberLoginBhv" class="com.todostack.dbflute.exbhv.MemberLoginBhv"/>
 	<component name="memberSecurityBhv" class="com.todostack.dbflute.exbhv.MemberSecurityBhv"/>
-	<component name="memberServiceBhv" class="com.todostack.dbflute.exbhv.MemberServiceBhv"/>
-	<component name="memberStatusBhv" class="com.todostack.dbflute.exbhv.MemberStatusBhv"/>
-	<component name="memberWithdrawalBhv" class="com.todostack.dbflute.exbhv.MemberWithdrawalBhv"/>
-	<component name="productBhv" class="com.todostack.dbflute.exbhv.ProductBhv"/>
-	<component name="productCategoryBhv" class="com.todostack.dbflute.exbhv.ProductCategoryBhv"/>
-	<component name="productStatusBhv" class="com.todostack.dbflute.exbhv.ProductStatusBhv"/>
-	<component name="purchaseBhv" class="com.todostack.dbflute.exbhv.PurchaseBhv"/>
-	<component name="purchasePaymentBhv" class="com.todostack.dbflute.exbhv.PurchasePaymentBhv"/>
-	<component name="regionBhv" class="com.todostack.dbflute.exbhv.RegionBhv"/>
-	<component name="serviceRankBhv" class="com.todostack.dbflute.exbhv.ServiceRankBhv"/>
-	<component name="withdrawalReasonBhv" class="com.todostack.dbflute.exbhv.WithdrawalReasonBhv"/>
+	<component name="taskBhv" class="com.todostack.dbflute.exbhv.TaskBhv"/>
+	<component name="taskWorkBhv" class="com.todostack.dbflute.exbhv.TaskWorkBhv"/>
 </components>

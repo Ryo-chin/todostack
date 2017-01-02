@@ -20,10 +20,11 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import com.todostack.dbflute.exbhv.TaskBhv;
+import com.todostack.dbflute.exentity.Task;
+import com.todostack.mylasta.action.TodostackUserBean;
 import org.dbflute.cbean.result.ListResultBean;
 import com.todostack.app.web.base.TodostackBaseAction;
-import com.todostack.dbflute.exbhv.ProductBhv;
-import com.todostack.dbflute.exentity.Product;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.response.HtmlResponse;
 
@@ -36,54 +37,36 @@ public class MypageAction extends TodostackBaseAction {
     //                                                                           Attribute
     //                                                                           =========
     @Resource
-    private ProductBhv productBhv;
+    TaskBhv taskBhv;
 
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
     @Execute
     public HtmlResponse index() {
-        List<MypageProductBean> recentProducts = mappingToProducts(selectRecentProductList());
-        List<MypageProductBean> highPriceProducts = mappingToProducts(selectHighPriceProductList());
+        // TODO: 2017/01/02 セッションからユーザー情報を取得できないときの処理
+        TodostackUserBean userBean = getUserBean().get();
+
         return asHtml(path_Mypage_MypageHtml).renderWith(data -> {
-            data.register("recentProducts", recentProducts);
-            data.register("highPriceProducts", highPriceProducts);
+            List<MyPageTaskBean> myPageTaskBeen = mappingToTasks(selectTaskList(userBean.getMemberId()));
+            data.register("taskList", mappingToTasks(selectTaskList(userBean.getMemberId())));
         });
     }
 
     // ===================================================================================
     //                                                                              Select
     //                                                                              ======
-    private ListResultBean<Product> selectRecentProductList() {
-        ListResultBean<Product> productList = productBhv.selectList(cb -> {
-            cb.specify().derivedPurchase().max(purchaseCB -> {
-                purchaseCB.specify().columnPurchaseDatetime();
-            }, Product.ALIAS_latestPurchaseDate);
-            cb.query().existsPurchase(purchaseCB -> {
-                purchaseCB.query().setMemberId_Equal(getUserBean().get().getMemberId());
-            });
-            cb.query().addSpecifiedDerivedOrderBy_Desc(Product.ALIAS_latestPurchaseDate);
-            cb.query().addOrderBy_ProductId_Asc();
-            cb.fetchFirst(3);
+    private ListResultBean<Task> selectTaskList(Long memberId) {
+        return taskBhv.selectList(cb -> {
+            cb.query().setMemberId_Equal(memberId);
+            cb.query().addOrderBy_DisplayNum_Asc();
         });
-        return productList;
-    }
-
-    private ListResultBean<Product> selectHighPriceProductList() {
-        ListResultBean<Product> productList = productBhv.selectList(cb -> {
-            cb.query().existsPurchase(purchaseCB -> {
-                purchaseCB.query().setMemberId_Equal(getUserBean().get().getMemberId());
-            });
-            cb.query().addOrderBy_RegularPrice_Desc();
-            cb.fetchFirst(3);
-        });
-        return productList;
     }
 
     // ===================================================================================
     //                                                                             Mapping
     //                                                                             =======
-    private List<MypageProductBean> mappingToProducts(List<Product> productList) {
-        return productList.stream().map(product -> new MypageProductBean(product)).collect(Collectors.toList());
+    private List<MyPageTaskBean> mappingToTasks(List<Task> taskList) {
+        return taskList.stream().map(MyPageTaskBean::new).collect(Collectors.toList());
     }
 }

@@ -24,7 +24,7 @@ public class HeaderBean { // #change_it #delete_ifapi
 
     private static final HeaderBean EMPTY_INSTANCE = new HeaderBean();
 
-    public final Integer memberId;
+    public final Long memberId;
     public final String memberName;
     public final boolean isLogin;
 
@@ -36,7 +36,7 @@ public class HeaderBean { // #change_it #delete_ifapi
 
     public HeaderBean(TodostackUserBean userBean) {
         this.memberId = userBean.getMemberId();
-        this.memberName = userBean.getMemberName();
+        this.memberName = userBean.getMemberAccount();
         this.isLogin = true;
     }
 
