@@ -1,0 +1,6 @@
+map:{
+    ; url = jdbc:mysql://localhost:3306/todostackdb
+	; schema =
+    ; user = todostackdb
+    ; password = todostackdb
+}
